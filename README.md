@@ -5,11 +5,9 @@ Herein lies a collection of modulinos/applications in various programming langua
 # EXAMPLE
 
 ```
-$ cd ruby/
-$ ruby swatch.rb 
-@105.48
-$ ruby swatch.rb 
-@105.49
-$ ruby swatch.rb 
-@105.50
+$ make
+mkdir -p bin/
+clang -O2 -Wall -Wextra -Wmost -Weverything -o bin/swatch swatch.c
+bin/swatch
+@156.32
 ```
