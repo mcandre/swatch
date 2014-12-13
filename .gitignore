@@ -1,0 +1,6 @@
+bin/
+*.class
+*.DS_Store
+Thumbs.db
+Gemfile.lock
+tmp/
