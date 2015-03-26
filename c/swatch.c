@@ -42,23 +42,22 @@ static double beats(void) {
   return beat;
 }
 
-static /*@null@*/ char* swatch() {
-  char* result;
+static /*@null@*/ char *swatch() {
+  char *result;
 
   result = (char *) malloc(sizeof(char) * 8);
 
   if (result != NULL) {
     (void) snprintf(result, 8, "@%06.2f", beats());
     return result;
-  }
-  else {
+  } else {
     printf("Out of memory.\n");
     return NULL;
   }
 }
 
 int main() {
-  char* s = swatch();
+  char *s = swatch();
 
   if (s != NULL) {
     printf("%s\n", s);
