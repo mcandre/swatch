@@ -20,9 +20,14 @@ task :clean_astyle => [] do
   sh 'find . -type f -name "*.orig" -exec rm {} \\;'
 end
 
+task :pep8 => [] do
+  sh 'find . -name node_modules -prune -o -name bower_components -prune -o -name "*.py" -exec pep8 {} \\;'
+end
+
 task :lint => [
   :editorconfig,
-  :astyle
+  :astyle,
+  :pep8
 ] do
 end
 
