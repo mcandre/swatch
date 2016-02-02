@@ -27,19 +27,25 @@ static double beats(void) {
 
   g = gmtime(&timer);
 
-  hour = g->tm_hour, min = g->tm_min, sec = g->tm_sec;
+  if (g != NULL) {
+    hour = g->tm_hour, min = g->tm_min, sec = g->tm_sec;
 
-  utc = hour * 3600 + min * 60 + sec; // Greenwich, England
+    utc = hour * 3600 + min * 60 + sec; // Greenwich, England
 
-  bmt = utc + 3600; // Biel, Switzerland
+    bmt = utc + 3600; // Biel, Switzerland
 
-  beat = bmt / 86.4;
+    beat = bmt / 86.4;
 
-  if (beat > 1000) {
-    beat -= 1000;
+    if (beat > 1000) {
+      beat -= 1000;
+    }
+
+    return beat;
+  } else {
+    printf("gmtime returned NULL!\n");
+
+    return -1.0;
   }
-
-  return beat;
 }
 
 static /*@null@*/ char *swatch() {

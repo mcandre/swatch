@@ -21,7 +21,10 @@ splint:
 vera++:
 	find . -type f -name '*.cpp' -o -name '*.[ch]' -exec vera++ -s {} \;
 
-lint: cppcheck splint vera++
+infer: clean
+	infer -- make
+
+lint: cppcheck splint vera++ infer
 
 valgrind: $(BIN)
 	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --track-fds=yes --dsymutil=yes ./$(BIN)
