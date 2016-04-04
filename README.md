@@ -5,9 +5,26 @@ Herein lies a collection of modulinos/applications in various programming langua
 # EXAMPLE
 
 ```
-$ make
-mkdir -p bin/
-clang -O2 -Wall -Wextra -Wmost -Weverything -o bin/swatch swatch.c
+$ cd c/
+$ cmake . && make
 bin/swatch
 @156.32
 ```
+
+# REQUIREMENTS
+
+## Compiler Collection
+
+* [clang](http://clang.llvm.org/)
+
+E.g. from Xcode
+
+* [gcc](https://gcc.gnu.org/)
+
+E.g. from Apt, Dnf, Homebrew, MinGW, Strawberry Perl
+
+## CMake
+
+* [cmake](https://cmake.org/)
+
+E.g. `brew install cmake`
