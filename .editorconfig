@@ -53,3 +53,7 @@ indent_size = 4
 # Windows files
 [{*.cmd,*.bat,*reg,*.ps1,*.vbs,*.cs,*.csproj,*.fs,*.sln,*.xaml*,*.ahk}]
 end_of_line = crlf
+
+# Generated files
+[MYMETA.json]
+indent_size = 3
