@@ -4,7 +4,7 @@ Herein lies a collection of modulinos/applications in various programming langua
 
 # EXAMPLE
 
-```
+```console
 $ cd c/
 $ cmake . && make
 bin/swatch
@@ -28,3 +28,11 @@ E.g. from Apt, Dnf, Homebrew, MinGW, Strawberry Perl
 * [cmake](https://cmake.org/)
 
 E.g. `brew install cmake`
+
+## Optional
+
+* [make](https://www.gnu.org/software/make/)
+* [GNU findutils](https://www.gnu.org/software/findutils/)
+* [stank](https://github.com/mcandre/stank) (e.g. `go get github.com/mcandre/stank/...`)
+* [Python](https://www.python.org) 3+ (for yamllint)
+* [Node.js](https://nodejs.org/en/) (for eclint)
