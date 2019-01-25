@@ -5,7 +5,7 @@ Herein lies a collection of modulinos/applications in various programming langua
 # EXAMPLE
 
 ```console
-$ cd c/
+$ cd c
 $ cmake . && make
 bin/swatch
 @156.32
