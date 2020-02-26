@@ -26,7 +26,7 @@ using std::string;
 
 static double beats(void) {
     auto timer = time(nullptr);
-    struct tm *g = gmtime(&timer);
+    auto g = gmtime(&timer);
 
     if (g == nullptr) {
         std::cerr << "gmtime returned NULL!" << endl;
