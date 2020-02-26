@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.4)
+
+project(swatch)
+set(EXECUTABLE_OUTPUT_PATH "bin")
+set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++ -O2 -Wall -Wextra -pedantic -Weffc++ -Wno-c++98-compat")
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  set(CMAKE_C_COMPILER "clang")
+  set(CMAKE_CXX_COMPILER "clang++")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wmost -Weverything")
+endif()
+add_executable(swatch lib/swatch.cpp)
+
+enable_testing()
+add_test(NAME swatchtest COMMAND swatch)
+
+add_custom_target(cppcheck COMMAND cppcheck -q --enable=all --suppressions-list=$ENV{HOME}/suppressions.cfg lib)
+add_custom_target(cpplint COMMAND find lib -type f -iname '*.cpp' -o -iname '*.cc' -o -iname '*.cxx' -o -iname '*.c' -o -iname '*.hh' -o -iname '*.hxx' -o -iname '*.h' -exec cpplint --filter=-readability/streams,-build/header_guard,-whitespace/parens,-readability/braces,-whitespace/newline,-legal/copyright {} "\;")
+add_custom_target(splint COMMAND find lib -type f -iname '*.[ch]' -exec splint {} "\;")
+add_custom_target(vera++ COMMAND find lib -type f -iname '*.cpp' -o -iname '*.cc' -o -iname '*.cxx' -o -iname '*.c' -o -iname '*.hh' -o -iname '*.hxx' -o -iname '*.h' -exec vera++ -s {} "\;")
+add_custom_target(lint DEPENDS cppcheck cpplint splint vera++)
+
+add_custom_target(valgrind COMMAND valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --track-fds=yes --dsymutil=yes $<TARGET_FILE:swatch>)

@@ -11,65 +11,57 @@
     Thanks for actual working example of C's time and date libraries.
 */
 
+#include <float.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
 static double beats(void) {
-    time_t timer;
-    struct tm *g;
-    int hour, min, sec;
-    int utc;
-    int bmt;
-    double beat;
+    time_t timer = time(NULL);
+    struct tm *g = gmtime(&timer);
 
-    timer = time(NULL);
-
-    g = gmtime(&timer);
-
-    if (g != NULL) {
-        hour = g->tm_hour, min = g->tm_min, sec = g->tm_sec;
-
-        utc = hour * 3600 + min * 60 + sec; // Greenwich, England
-
-        bmt = utc + 3600; // Biel, Switzerland
-
-        beat = bmt / 86.4;
-
-        if (beat > 1000) {
-            beat -= 1000;
-        }
-
-        return beat;
-    } else {
-        printf("gmtime returned NULL!\n");
-
+    if (g == NULL) {
+        fprintf(stderr, "gmtime returned NULL!\n");
         return -1.0;
     }
+
+    int hour = g->tm_hour;
+    int min = g->tm_min;
+    int sec = g->tm_sec;
+    int utc = hour * 3600 + min * 60 + sec; // Greenwich, England
+    int bmt = (utc + 3600) % (24 * 3600); // Biel, Switzerland
+    double beat = bmt / 86.4;
+    return beat;
 }
 
 static /*@null@*/ char *swatch() {
-    char *result;
+    char *result = (char *) malloc(sizeof(char) * 8);
 
-    result = (char *) malloc(sizeof(char) * 8);
-
-    if (result != NULL) {
-        (void) snprintf(result, 8, "@%06.2f", beats());
-        return result;
-    } else {
-        printf("Out of memory.\n");
+    if (result == NULL) {
+        fprintf(stderr, "Out of memory.\n");
         return NULL;
     }
+
+    double b = beats();
+
+    if (fabs(b - -1.0) <= DBL_EPSILON) {
+        return result;
+    }
+
+    (void) snprintf(result, 8, "@%06.2f", b);
+    return result;
 }
 
 int main() {
     char *s = swatch();
 
-    if (s != NULL) {
-        printf("%s\n", s);
-
+    if (s == NULL) {
         free(s);
+        return 1;
     }
 
+    printf("%s\n", s);
+    free(s);
     return 0;
 }
