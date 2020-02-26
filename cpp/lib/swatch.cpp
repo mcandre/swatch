@@ -58,7 +58,7 @@ static string swatch() {
 }
 
 int main() {
-    string s = swatch();
+    auto s = swatch();
 
     if (s == "") {
         return 1;
