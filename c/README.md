@@ -1,6 +1,16 @@
-# DEPRECATED
+# swatch: Internet Time
 
-See https://github.com/mcandre/go-swatch
+# EXAMPLE
 
-Robust C code requires vigilance, whereas Go automatically solves most of these issues on behalf of the programmer.
+```console
+$ swatch
+@985.82
+```
 
+# RUNTIME REQUIREMENTS
+
+(None)
+
+# CONTRIBUTING
+
+For more details on developing tinyrick itself, see [DEVELOPMENT.md](DEVELOPMENT.md).
