@@ -11,42 +11,32 @@
     Thanks for actual working example of C's time and date libraries.
 */
 
+#include "swatch.hh"
+
 #include <cfloat>
 #include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
 #include <ios>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
 using std::endl;
-using std::string;
 
-static double beats(void) {
+double beats() {
     auto timer = time(nullptr);
-    auto g = gmtime(&timer);
-
-    if (g == nullptr) {
-        std::cerr << "gmtime returned NULL!" << endl;
-        return -1.0;
-    }
-
+    struct tm tbuf;
+    auto g = gmtime_r(&timer, &tbuf);
     auto hour = g->tm_hour, min = g->tm_min, sec = g->tm_sec;
-    auto utc = hour * 3600 + min * 60 + sec; // Greenwich, England
-    auto bmt = (utc + 3600) % (24 * 3600); // Biel, Switzerland
+    auto utc = hour * 3600 + min * 60 + sec;
+    auto bmt = (utc + 3600) % (24 * 3600);
     auto beat = bmt / 86.4;
     return beat;
 }
 
-static string swatch() {
-    auto b = beats();
-
-    if (fabs(b - -1) < DBL_EPSILON) {
-        return "";
-    }
-
+string swatch() {
     std::stringstream result;
     result << "@";
     result.setf(std::ios::fixed, std::ios::floatfield);
@@ -58,12 +48,6 @@ static string swatch() {
 }
 
 int main() {
-    auto s = swatch();
-
-    if (s == "") {
-        return 1;
-    }
-
-    std::cout << s << endl;
-    return 0;
+    std::cout << swatch() << endl;
+    return EXIT_SUCCESS;
 }

@@ -1,10 +1,16 @@
-# REQUIREMENTS
+# swatch: Internet Time
 
-* a [C++ compiler](https://en.wikipedia.org/wiki/List_of_compilers#C++_compilers)
-* [cmake](https://cmake.org)
+# EXAMPLE
 
-## Optional
+```console
+$ swatch
+@985.82
+```
 
-* [cppcheck](http://cppcheck.sourceforge.net)
-* [splint](http://www.splint.org)
-* [vera++](https://bitbucket.org/verateam/vera/wiki/Home)
+# RUNTIME REQUIREMENTS
+
+(None)
+
+# CONTRIBUTING
+
+For more details on developing swatch itself, see [DEVELOPMENT.md](DEVELOPMENT.md).
