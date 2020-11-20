@@ -1,54 +1,53 @@
 # BUILDTIME REQUIREMENTS
 
-* a [C](https://en.wikipedia.org/wiki/List_of_compilers#C_compilers) compiler
+* [Docker](https://www.docker.com/)
 
 ## Recommended
 
-* [cmake](https://cmake.org/)
-* [coreutils](https://www.gnu.org/software/coreutils/)
-* [cppcheck](http://cppcheck.sourceforge.net/)
-* [cpplint](https://github.com/cpplint/cpplint)
-* [Docker](https://www.docker.com/)
-* [findutils](https://www.gnu.org/software/findutils/)
-* [sail](https://github.com/mcandre/sail)
-* [Valgrind](https://valgrind.org/)
-* [vera++](https://bitbucket.org/verateam/vera/wiki/Home)
+* [karp](https://github.com/mcandre/karp) (`go get github.com/mcandre/karp/...`)
 
 # PREBUILD
 
 ```console
 $ docker build -t mcandre/swatch-buildbot .
 $ docker run --rm -it -v "$(pwd):/src" mcandre/swatch-buildbot sh
-$ cd /src
-$ cmake .
+# cd /src
+# cmake .
 ```
 
 # LINT
 
 ```console
-$ cmake --build . --target lint
+# cmake --build . --target lint
 ```
 
 # COMPILE
 
 ```console
-$ cmake --build . --config Release
+# cmake --build . --config Release
 ```
 
 # LEAK CHECK
 
 ```console
-$ cmake --build . --target leaks
+# cmake --build . --target leaks
 ```
 
 # TEST
 
 ```console
-$ CTEST_OUTPUT_ON_FAILURE=1 ctest -C Release
+# CTEST_OUTPUT_ON_FAILURE=1 ctest -C Release
+```
+
+# DOCUMENT
+
+```console
+# cmake --build . --target doc
+$ karp html/index.html
 ```
 
 # CLEAN
 
 ```console
-$ ./clean-cmake.sh
+# ./clean-cmake.sh
 ```

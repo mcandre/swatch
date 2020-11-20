@@ -5,7 +5,6 @@ project(swatch)
 
 set(EXECUTABLE_OUTPUT_PATH "bin")
 set(LSB_RELEASE "")
-set(ETC_RELEASE "")
 
 if(MSVC)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${EXECUTABLE_OUTPUT_PATH}")
@@ -19,14 +18,13 @@ if(MSVC)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${EXECUTABLE_OUTPUT_PATH}")
 elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
     execute_process(COMMAND lsb_release -a OUTPUT_VARIABLE LSB_RELEASE)
-    execute_process(COMMAND cat /etc/*release* OUTPUT_VARIABLE ETC_RELEASE)
 endif()
 
 set(WINDOWS_C_FLAGS "${CMAKE_C_FLAGS} /O2 /WX /W4 /wd4204")
-
 set(UNIX_C_FLAGS "${CMAKE_C_FLAGS} -O2 -Werror")
 set(GNU_C_FLAGS "${UNIX_C_FLAGS} -std=gnu99 -Wextra -Wall -pedantic")
-set(CLANG_C_FLAGS "${GNU_C_FLAGS} -Wmost -Weverything")
+set(LLVM_FLAGS "-Wmost -Weverything -Wno-documentation-unknown-command")
+set(CLANG_C_FLAGS "${GNU_C_FLAGS} ${LLVM_FLAGS}")
 
 if(MSVC)
     set(CMAKE_C_FLAGS "${WINDOWS_C_FLAGS}")
@@ -41,13 +39,15 @@ else()
     set(CMAKE_C_FLAGS "${UNIX_C_FLAGS}")
 endif()
 
-add_executable(swatch lib/swatch.c)
+include_directories(include)
+
+add_executable(swatch src/cmd/swatch/main.c src/swatch.c)
 
 add_test(NAME swatch_unit_test COMMAND bin/swatch)
 
-add_custom_target(cppcheck COMMAND cppcheck -q --enable=all --inline-suppr --suppressions-list=suppressions.cfg -DX_PATH_MAX=1024 --error-exitcode=1 lib)
-add_custom_target(cpplint COMMAND sail lib | xargs -n 1 cpplint)
-add_custom_target(vera++ COMMAND sail lib | xargs -n 1 vera++)
+add_custom_target(cppcheck COMMAND cppcheck -q --enable=all --inline-suppr --suppressions-list=suppressions.cfg -DX_PATH_MAX=1024 --error-exitcode=1 -I include src)
+add_custom_target(cpplint COMMAND sail include src | xargs -n 1 cpplint)
+add_custom_target(vera++ COMMAND sail include src | xargs -n 1 vera++)
 
 # Missing linter ports
 if(
@@ -104,5 +104,7 @@ if(
 else()
     add_custom_target(leaks DEPENDS valgrind)
 endif()
+
+add_custom_target(doc COMMAND doxygen Doxyfile)
 
 add_custom_target(clean-cmake COMMAND sh clean-cmake.sh)
