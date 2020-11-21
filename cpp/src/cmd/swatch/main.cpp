@@ -7,6 +7,6 @@
 #include "swatch/swatch.hpp"
 
 int main() {
-    std::cout << swatch_now() << std::endl;
+    std::cout << swatch::SwatchNow() << std::endl;
     return EXIT_SUCCESS;
 }

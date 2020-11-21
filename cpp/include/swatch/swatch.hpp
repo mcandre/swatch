@@ -4,37 +4,34 @@
  * @copyright 2020 YelloSoft
  * @mainpage
  *
- * @ref beats converts the given time to the Swatch beat count.
- *
- * @ref swatch_now presents the current Internet time.
- *
- * @ref swatch_time formats the given time as Internet time.
+ * @ref swatch processes Internet time.
  */
 
 #include <ctime>
 #include <string>
 
-using std::string;
+/** swatch processes Internet time. */
+namespace swatch {
+    /**
+     * Beats counts out Swatch beats.
+     *
+     * @param t time
+     * @returns Swatch beat count
+     */
+    double Beats(time_t t);
 
-/**
- * beats counts out Swatch beats.
- *
- * @param t time
- * @returns Swatch beat count
- */
-double beats(struct tm *t);
+    /**
+     * SwatchNow formats the current Internet time.
+     *
+     * @returns Internet time
+     */
+    std::string SwatchNow();
 
-/**
- * swatch_now formats the current Internet time.
- *
- * @returns Internet time
- */
-string swatch_now();
-
-/**
- * swatch_time formats a given time as Internet time.
- *
- * @param t time
- * @returns Internet time
- */
-string swatch_time(struct tm *t);
+    /**
+     * SwatchTime formats a given time as Internet time.
+     *
+     * @param t time
+     * @returns Internet time
+     */
+    std::string SwatchTime(time_t t);
+}

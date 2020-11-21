@@ -24,7 +24,7 @@
  * @param t time
  * @returns Swatch beat count
  */
-double beats(struct tm *t);
+double beats(time_t t);
 
 /**
  * swatch_now formats the current Internet time.
@@ -39,4 +39,4 @@ void swatch_now(char *result);
  * @param t time
  * @param result answer buffer
  */
-void swatch_time(struct tm *t, char *result);
+void swatch_time(time_t t, char *result);
