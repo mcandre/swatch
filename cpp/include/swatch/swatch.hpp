@@ -15,10 +15,10 @@ namespace swatch {
     /**
      * Beats counts out Swatch beats.
      *
-     * @param t time
+     * @param t UTC
      * @returns Swatch beat count
      */
-    double Beats(time_t t);
+    double Beats(struct tm *t);
 
     /**
      * SwatchNow formats the current Internet time.
@@ -30,8 +30,8 @@ namespace swatch {
     /**
      * SwatchTime formats a given time as Internet time.
      *
-     * @param t time
+     * @param t UTC
      * @returns Internet time
      */
-    std::string SwatchTime(time_t t);
+    std::string SwatchTime(struct tm *t);
 }

@@ -12,16 +12,22 @@
 
 #include "swatch/swatch.hpp"
 
-double swatch::Beats(time_t t) {
-    auto bmt = (t + 3600) % 86400;
-    return double(bmt) / 86.4;
+double swatch::Beats(struct tm *t) {
+    auto utc = t->tm_hour * 3600 +
+        t->tm_min * 60 +
+        t->tm_sec;
+    auto bmt = (utc + 3600) % 86400;
+    return double(bmt) * 1000.0 / 86400.0;
 }
 
 std::string swatch::SwatchNow() {
-    return swatch::SwatchTime(time(nullptr));
+    auto epoch = time(nullptr);
+    struct tm tbuf;
+    auto t = gmtime_r(&epoch, &tbuf);
+    return swatch::SwatchTime(t);
 }
 
-std::string swatch::SwatchTime(time_t t) {
+std::string swatch::SwatchTime(struct tm *t) {
     std::stringstream result;
     result << "@";
     result.setf(std::ios::fixed, std::ios::floatfield);
