@@ -20,5 +20,9 @@ int swatch_now(char *result, size_t result_size) {
 }
 
 int swatch_time(char *result, size_t result_size, struct tm *t) {
+    if (result_size < 7) {
+        return -1;
+    }
+
     return snprintf(result, result_size, "@%06.2f", beats(t));
 }
