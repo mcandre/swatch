@@ -12,13 +12,13 @@ double beats(struct tm *t) {
     return (double) bmt * 1000.0 / 86400.0;
 }
 
-void swatch_now(char *result) {
+int swatch_now(char *result, size_t result_size) {
     time_t epoch = time(NULL);
     struct tm tbuf;
     struct tm *t = gmtime_r(&epoch, &tbuf);
-    swatch_time(result, t);
+    return swatch_time(result, result_size, t);
 }
 
-void swatch_time(char *result, struct tm *t) {
-    (void) snprintf(result, sizeof(result), "@%06.2f", beats(t));
+int swatch_time(char *result, size_t result_size, struct tm *t) {
+    return snprintf(result, result_size, "@%06.2f", beats(t));
 }

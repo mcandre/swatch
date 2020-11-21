@@ -29,14 +29,20 @@ double beats(struct tm *t);
 /**
  * swatch_now formats the current Internet time.
  *
- * @param result answer buffer
+ * @param result buffer
+ * @param result_size buffer size (bytes)
+ *
+ * @returns bytes written. A value outside [0, result_size] indicates error.
  */
-void swatch_now(char *result);
+int swatch_now(char *result, size_t result_size);
 
 /**
  * swatch_time formats a given time as Internet time.
  *
- * @param result answer buffer
+ * @param result buffer
+ * @param result_size buffer size (bytes)
  * @param t UTC
+ *
+ * @returns bytes written. A value outside [0, result_size] indicates error.
  */
-void swatch_time(char *result, struct tm *t);
+int swatch_time(char *result, size_t result_size, struct tm *t);

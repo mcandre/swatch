@@ -10,8 +10,13 @@
 
 int main() {
     char result[8];
-    memset(result, 0, sizeof(result));
-    swatch_now(result);
+    int bytes_written = swatch_now(result, sizeof(result));
+
+    if (bytes_written < 0 || bytes_written > (int) sizeof(result)) {
+        fprintf(stderr, "error writing to buffer\n");
+        return EXIT_FAILURE;
+    }
+
     printf("%s\n", result);
     return EXIT_SUCCESS;
 }
