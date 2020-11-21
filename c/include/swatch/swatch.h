@@ -36,7 +36,7 @@ void swatch_now(char *result);
 /**
  * swatch_time formats a given time as Internet time.
  *
- * @param t UTC
  * @param result answer buffer
+ * @param t UTC
  */
 void swatch_time(char *result, struct tm *t);
