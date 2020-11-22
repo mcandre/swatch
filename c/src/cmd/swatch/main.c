@@ -9,14 +9,13 @@
 #include "swatch/swatch.h"
 
 int main() {
-    char result[8];
-    int bytes_written = swatch_now(result, sizeof(result));
+    char buf[8];
 
-    if (bytes_written < 0 || bytes_written > (int) sizeof(result)) {
+    if (swatch_now(buf) < 0) {
         fprintf(stderr, "error writing to buffer\n");
         return EXIT_FAILURE;
     }
 
-    printf("%s\n", result);
+    printf("%s\n", buf);
     return EXIT_SUCCESS;
 }
