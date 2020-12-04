@@ -10,12 +10,7 @@
 
 int main() {
     char buf[8];
-
-    if (swatch_now(buf) < 0) {
-        fprintf(stderr, "error writing to buffer\n");
-        return EXIT_FAILURE;
-    }
-
+    swatch_now(buf);
     printf("%s\n", buf);
     return EXIT_SUCCESS;
 }

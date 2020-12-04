@@ -10,7 +10,7 @@
 #include <ctime>
 #include <string>
 
-/** swatch processes Internet time. */
+/** @brief swatch processes Internet time. */
 namespace swatch {
     /**
      * Beats counts out Swatch beats.
@@ -21,14 +21,14 @@ namespace swatch {
     double Beats(struct tm *t);
 
     /**
-     * SwatchNow formats the current Internet time.
+     * @brief SwatchNow formats the current Internet time.
      *
      * @returns Internet time
      */
     std::string SwatchNow();
 
     /**
-     * SwatchTime formats a given time as Internet time.
+     * @brief SwatchTime formats a given time as Internet time.
      *
      * @param t UTC
      * @returns Internet time
