@@ -1,11 +1,15 @@
-# swatch: Internet Time
+# swatch++: Internet Time
 
 # EXAMPLE
 
 ```console
-$ swatch
+$ swatch++
 @985.82
 ```
+
+# DOCUMENTATION
+
+https://mcandre.github.io/swatch/cpp/
 
 # RUNTIME REQUIREMENTS
 

@@ -7,6 +7,10 @@ $ swatch
 @985.82
 ```
 
+# DOCUMENTATION
+
+https://mcandre.github.io/swatch/c/
+
 # RUNTIME REQUIREMENTS
 
 (None)

@@ -10,7 +10,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "swatch/swatch.hpp"
+#include "swatch++/swatch++.hpp"
 
 double swatch::Beats(struct tm *t) {
     auto utc = t->tm_hour * 3600 +
